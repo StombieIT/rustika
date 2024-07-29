@@ -1,0 +1,62 @@
+---
+import Link from "./Link.astro";
+import logoMetaData from "@/assets/corn.png";
+
+const { src: logoSrc } = logoMetaData;
+---
+
+<nav class="navbar">
+    <Link href="/" class="logo-wrapper">
+        <img src={logoSrc} alt="ООО Рустика" class="image" />
+    </Link>
+    <div class="links">
+        <Link class="nav-link" href="#">
+            Семена пшеницы
+        </Link>
+    </div>
+    <div class="contacts">
+        <Link href="tel:+79184613211" title="Позвонить" class="phone-number">
+            8-918-461-32-11
+        </Link>
+        <span class="schedule">
+            пн-пт 8:00-17:00
+        </span>
+    </div>
+</nav>
+
+<style lang="scss">    
+    .logo-wrapper {
+        padding: 20px;
+
+        &:hover .image {
+            transform: scale(1.05);
+        }
+    }
+
+    .image {
+        height: 75px;
+        transition: .15s transform;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-link {
+        @include centering-block;
+        height: 100%;
+        padding: 0 20px;
+        transition: .3s color;
+
+        &:hover {
+            color: $active-color;
+        }
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+</style>
