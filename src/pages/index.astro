@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Container from '@/components/Container.astro';
-import Carousel from '@/components/svelte/Carousel.svelte';
+import MainCarousel from '@/components/svelte/MainCarousel.svelte';
 
 const imagesAttrs = [
 	{ src: "123", alt: "sas"}
@@ -10,6 +10,6 @@ const imagesAttrs = [
 
 <Layout title="testing">
 	<Container>
-		<Carousel imagesAttrs={imagesAttrs} client:load />
+		<MainCarousel imagesAttrs={imagesAttrs} client:load />
 	</Container>
 </Layout>

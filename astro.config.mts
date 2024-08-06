@@ -1,18 +1,27 @@
 import { defineConfig } from 'astro/config';
+import svelte from "@astrojs/svelte";
+import { sveltePreprocess } from "svelte-preprocess";
 import { loadStylesPaths } from './utils/package.mts';
 import { combinePaths } from './utils/scss.mts';
-import svelte from "@astrojs/svelte";
+
+const scssPrependData = combinePaths(await loadStylesPaths());
 
 // https://astro.build/config
 export default defineConfig({
     integrations: [
-        svelte()
+        svelte({
+            preprocess: sveltePreprocess({
+                scss: {
+                    prependData: scssPrependData,
+                }
+            }),
+        })
     ],
     vite: {
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: combinePaths(await loadStylesPaths())
+                    additionalData: scssPrependData
                 }
             }
         }
