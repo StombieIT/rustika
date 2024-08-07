@@ -1,15 +1,18 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Container from '@/components/Container.astro';
 import MainCarousel from '@/components/svelte/MainCarousel.svelte';
 
-const imagesAttrs = [
-	{ src: "123", alt: "sas"}
-];
+const carouselImagesImports = import.meta.glob("@/assets/carousel/*.(png|jpeg|jpg)", { eager: true });
+
+const imagesAttrs = Object.entries(carouselImagesImports)
+	.map(([, module]) => {
+		// @ts-ignore
+		const { src } = module.default;
+
+		return { src, alt: src };
+	});
 ---
 
 <Layout title="testing">
-	<Container>
-		<MainCarousel imagesAttrs={imagesAttrs} client:load />
-	</Container>
+	<MainCarousel imagesAttrs={imagesAttrs} client:load />
 </Layout>
