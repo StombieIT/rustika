@@ -11,8 +11,7 @@
 
     let selectedImageTimer: ReturnType<typeof setTimeout>;
 
-    $: elementWidth = carouselWrapper?.scrollWidth / imagesAttrs.length;
-    $: offset = elementWidth * selectedImageIdx;
+    $: offset = (carouselWrapper?.scrollWidth / imagesAttrs.length) * selectedImageIdx;
 
     $: {
         if (selectedImageTimer) {
@@ -43,10 +42,12 @@
             style:--carousel-offset={`${offset ?? 0}px`}
             bind:this={carouselWrapper}
         >
-            {#each imagesAttrs as _}
+            {#each imagesAttrs as { src, alt }}
                 <div
                     class="carousel-item"
-                ></div>
+                >
+                    <img class="image" {src} {alt}>
+                </div>
             {/each}
         </div>
     </div>
@@ -93,12 +94,12 @@
     }
 
     .carousel-item {
-        background-color: red;
         flex-basis: 100%;
         flex-shrink: 0;
+        @include centering-block;
 
-        &:nth-child(2) {
-            background-color: blue;
+        .image {
+            min-width: 100%;
         }
     }
 
