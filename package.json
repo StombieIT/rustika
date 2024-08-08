@@ -2,12 +2,18 @@
   "name": "rustika",
   "type": "module",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:StombieIT/rustika.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "publish": "node --loader ts-node/esm publish.mts",
+    "deploy": "npm run build && npm run publish"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.3",
@@ -16,10 +22,13 @@
   },
   "devDependencies": {
     "@astrojs/svelte": "^5.7.0",
+    "@types/gh-pages": "^6.1.0",
     "@types/node": "^20.14.12",
+    "gh-pages": "^6.1.1",
     "glob": "^11.0.0",
     "sass": "^1.77.8",
     "svelte": "^4.2.18",
-    "svelte-preprocess": "^6.0.2"
+    "svelte-preprocess": "^6.0.2",
+    "ts-node": "^10.9.2"
   }
 }
