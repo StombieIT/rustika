@@ -5,5 +5,5 @@
         "module": "CommonJS",
         "moduleResolution": "Node"
     },
-    "include": ["publish.mts"]
+    "include": ["publish-gh.mts"]
 }

@@ -12,7 +12,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "publish:gh": "node --loader ts-node/esm publish.mts",
+    "publish:gh": "node --loader ts-node/esm publish-gh.mts",
     "deploy:gh": "npm run build && npm run publish:gh"
   },
   "dependencies": {
