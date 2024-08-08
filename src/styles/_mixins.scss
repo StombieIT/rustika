@@ -3,3 +3,21 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin inset($offset) {
+    @supports (inset: $offset) {
+        inset: $offset;
+    }
+
+    @supports not (inset: $offset) {
+        top: $offset;
+        bottom: $offset;
+        left: $offset;
+        right: $offset;
+    }
+}
+
+@mixin absolute-overlay($offset: 0) {
+    position: absolute;
+    @include inset($offset);
+}

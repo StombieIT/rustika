@@ -1,134 +1,34 @@
 <script lang="ts">
-    import { onDestroy } from "svelte";
+    import Carousel from "./Carousel.svelte";
 
     import type { IImageAttributes } from "@/types/image";
 
-    export let imagesAttrs: IImageAttributes[] = [];
-
-    let selectedImageIdx = 0;
-    let isTabsTouching = false;
-    let carouselWrapper: HTMLDivElement;
-
-    let selectedImageTimer: ReturnType<typeof setTimeout>;
-
-    $: offset = carouselWrapper?.scrollWidth * selectedImageIdx / imagesAttrs.length;
-
-    $: {
-        if (selectedImageTimer) {
-            clearTimeout(selectedImageTimer);
-        }
-        if (!isTabsTouching) {
-            selectedImageTimer = setTimeout(() =>
-                selectedImageIdx = (selectedImageIdx + 1) % imagesAttrs.length,
-                10000
-            );
-        }
-    }
-
-    onDestroy(() => {
-        if (selectedImageTimer) {
-            clearTimeout(selectedImageTimer)
-        }
-    });
+    export let imagesAttrs: IImageAttributes[];
 </script>
 
-<div class="carousel">
-    <div class="payload">
-        <h2 class="header">Семена Озимой пшеницы</h2>
+<Carousel {imagesAttrs}>
+    <div class="info">
+        <h1 class="header">РУСТИКА</h1>
+        <p class="meta">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti, magni qui sint illo vitae asperiores dolor dolore odit ut tempore dicta iste quam numquam quo a doloremque! Unde, ab veritatis.
+        </p>
     </div>
-    <div class="carousel-container">
-        <div
-            class="carousel-wrapper"
-            style:--carousel-offset={`${offset ?? 0}px`}
-            bind:this={carouselWrapper}
-        >
-            {#each imagesAttrs as { src, alt }}
-                <div
-                    class="carousel-item"
-                >
-                    <img class="image" {src} {alt}>
-                </div>
-            {/each}
-        </div>
-    </div>
-    {#if imagesAttrs.length}
-        <div
-            class="tabs"
-            on:mouseenter={() => isTabsTouching = true}
-            on:mouseleave={() => isTabsTouching = false}
-        >
-            {#each imagesAttrs as _, idx}
-                <div
-                    class="tab"
-                    class:__selected={selectedImageIdx === idx}
-                    on:mouseenter={() => selectedImageIdx = idx}
-                ></div>
-            {/each}
-        </div>
-    {/if}
-</div>
+</Carousel>
 
 <style lang="scss">
-    .carousel {
+    .info {
         position: relative;
-    }    
-
-    .payload {
-        color: #fff;
-        @include centering-block;
-        position: absolute;
+        padding: 25px;
+        color: $c-white;
+        min-height: 550px;
+        font-size: 50px;
     }
 
-    .carousel-container {
-        height: 600px;
-        overflow: hidden;
+    .header {
+        text-transform: uppercase;
     }
 
-    .carousel-wrapper {
-        --carousel-offset: 0;
-        height: 100%;
-        display: flex;
-        align-items: stretch;
-        transform: translateX(calc(-1 * var(--carousel-offset)));
-        transition: .7s transform ease-in-out;
-    }
-
-    .carousel-item {
-        flex-basis: 100%;
-        flex-shrink: 0;
-        @include centering-block;
-
-        .image {
-            min-width: 100%;
-        }
-    }
-
-    .tabs {
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        display: flex;
-    }
-
-    .tab {
-        --carousel-tab-opacity: 0.5;
-        cursor: pointer;
-        padding: 20px 8px;
-        
-        &::before {
-            content: '';
-            display: block;
-            height: 5px;
-            width: 25px;
-            background-color: $c-white;
-            border-radius: 10px;
-            opacity: var(--carousel-tab-opacity);
-            transition: .3s opacity ease-in-out;
-        }
-
-        &.__selected {
-            --carousel-tab-opacity: 1;
-        }
+    .meta {
+        font-size: 30px;
     }
 </style>
