@@ -11,7 +11,7 @@
 
     let selectedImageTimer: ReturnType<typeof setTimeout>;
 
-    $: offset = (carouselWrapper?.scrollWidth / imagesAttrs.length) * selectedImageIdx;
+    $: offset = carouselWrapper?.scrollWidth * selectedImageIdx / imagesAttrs.length;
 
     $: {
         if (selectedImageTimer) {
