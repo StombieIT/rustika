@@ -1,6 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import MainCarousel from '@/components/svelte/MainCarousel.svelte';
+import Container from '@/components/Container.astro';
+import Section from "@/components/Section.astro";
+import TabsPreview from '@/components/svelte/TabsPreview.svelte';
+
+import type { ITabPreview } from '@/types/controls';
 
 const carouselImagesImports = import.meta.glob("@/assets/carousel/*.(png|jpeg|jpg)", { eager: true });
 
@@ -11,8 +16,21 @@ const imagesAttrs = Object.entries(carouselImagesImports)
 
 		return { src, alt: src };
 	});
+
+const tabs: ITabPreview[] = [
+	{
+		id: "ficko",
+		header: "Testing",
+		previewName: "ficko"
+	}
+];
 ---
 
 <Layout title="testing">
 	<MainCarousel imagesAttrs={imagesAttrs} client:load />
+	<Container>
+		<Section>
+			<TabsPreview tabs={tabs} client:load />			
+		</Section>
+	</Container>
 </Layout>

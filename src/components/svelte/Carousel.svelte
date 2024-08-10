@@ -124,6 +124,8 @@
 
         .image {
             min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
             transition: hover-animation(transform);
 
             @include carousel-hover {
