@@ -8,6 +8,8 @@ const scssPrependData = combinePaths(await loadStylesPaths());
 
 // https://astro.build/config
 export default defineConfig({
+    site: "https://stombieit.github.io",
+    base: "rustika",
     integrations: [
         svelte({
             preprocess: sveltePreprocess({
@@ -15,7 +17,7 @@ export default defineConfig({
                     prependData: scssPrependData,
                 }
             }),
-        })
+        }),
     ],
     vite: {
         css: {
