@@ -2,10 +2,10 @@ export type TabId = string;
 
 export interface ITab {
     id: TabId;
-    header: string;
+    title: string;
     content?: string;
 }
 
 export interface ITabPreview extends ITab {
-    previewName: string;
+    previewSrc?: string;
 }

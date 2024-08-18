@@ -17,20 +17,34 @@ const imagesAttrs = Object.entries(carouselImagesImports)
 		return { src, alt: src };
 	});
 
-const tabs: ITabPreview[] = [
+const tabs: ITabPreview[] = await Promise.all([
 	{
-		id: "ficko",
-		header: "Testing",
-		previewName: "ficko"
+		id: "oktyabrina",
+		title: "Октябрина",
+		content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas libero aperiam quos dicta distinctio fugit quis incidunt fuga. Odit incidunt dicta illo tenetur aspernatur dolorum quos in facere beatae laborum.",
+		previewName: "ficko",
+	},
+	{
+		id: "zarina",
+		title: "Зарина",
+		previewName: "ficko",
 	}
-];
+].map(async ({ id, ...tabPreview }) =>
+	({
+		...tabPreview,
+		id,
+		previewSrc: await (import(`/src/assets/tabs-preview/${id}.png?url`) as any).default
+	})
+));
+
+console.log("TABS", tabs);
 ---
 
 <Layout title="testing">
-	<MainCarousel imagesAttrs={imagesAttrs} client:load />
+	<MainCarousel {imagesAttrs} client:load />
 	<Container>
 		<Section>
-			<TabsPreview tabs={tabs} client:load />			
+			<TabsPreview {tabs} client:load />			
 		</Section>
 	</Container>
 </Layout>
