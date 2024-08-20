@@ -33,11 +33,9 @@ const tabs: ITabPreview[] = await Promise.all([
 	({
 		...tabPreview,
 		id,
-		previewSrc: await (import(`/src/assets/tabs-preview/${id}.png?url`) as any).default
+		previewSrc: (await import(`../assets/tabs-preview/${id}.png?url`)).default
 	})
 ));
-
-console.log("TABS", tabs);
 ---
 
 <Layout title="testing">
