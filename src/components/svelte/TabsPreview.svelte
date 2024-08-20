@@ -30,11 +30,10 @@
                 class={cn({
                     "preview-active": activeTabId === id
                 })}
+                src={previewSrc}
                 {title}
                 overlay
-            >
-                <img class="image" src={previewSrc} alt={title} />
-            </Preview>
+            />
         {/each}
     </div>
 </div>
@@ -68,11 +67,5 @@
         :global(.preview-active) {
             z-index: 1;
         }
-    }
-
-    .image {
-        min-height: 100%;
-        min-width: 100%;
-        object-fit: cover;
     }
 </style>
